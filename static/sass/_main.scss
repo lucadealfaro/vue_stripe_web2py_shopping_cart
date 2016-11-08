@@ -6,4 +6,28 @@
   input.search_input {
     width: 90%;
   }
+  div.product_description {
+    margin-top: 15px;
+  }
+  span.buy_buttons {
+    margin-left: 30px;
+  }
+  span.product_quantity {
+    margin-left: 30px;
+  }
+  span.product_price {
+    font-size: 140%;
+    font-weight: bold;
+  }
+  .product_image {
+    max-width: 400px;
+  }
+  .shopping_button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .search_div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }

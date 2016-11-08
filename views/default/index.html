@@ -24,17 +24,17 @@
         <div id="products_list">
             <div v-for="product in products">
                 <div class="col-md-3">
-                    <img v-bind:src="product.image_url" width="90%" />
+                    <img v-bind:src="product.image_url" width="100%" class="product_image"/>
                 </div>
                 <div class="col-md-7 product_info">
                     <div class="product_name"><h2>${product.product_name}</h2></div>
                     <div class="product_quantity_price">
                         <span class="product_price">$ ${product.price}</span>
-                        <span class="product_quantity">${product.quantity} in stock</span>
+                        <span class="product_quantity">Quantity in stock: ${product.quantity}</span>
                         <span class="buy_buttons">
-                            <button class="btn btn-default"><i class="fa fa-plus"></i></button>
+                            <button class="btn btn-secondary"><i class="fa fa-plus"></i></button>
                             <span class="desired_quantity">${product.desired_quantity}</span>
-                            <button class="btn btn-default"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-secondary"><i class="fa fa-minus"></i></button>
                             <button class="btn btn-danger"><i class="fa fa-lg fa-shopping-cart"></i> Buy</button>
                         </span>
                     </div>
