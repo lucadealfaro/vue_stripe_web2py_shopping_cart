@@ -1,1 +1,26 @@
 {{extend 'layout.html'}}
+
+{{block head}}
+<script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script>
+    var products_url = "{{=URL('default', 'get_products')}}";
+</script>
+{{end}}
+
+<div class="main_content">
+    <div id="vue-div" style="display:none">
+        <div class="control_bar">
+            <div class="search_div col-md-9">
+                <input class="search_input" v-model="product_search"/>
+                <button class="btn btn-success"><i class="fa fa-search fa-lg"></i></button>
+            </div>
+            <div class="shopping_button pull-right">
+                <button class="btn btn-warning">
+                    <i class="fa fa-lg fa-shopping-cart"></i> ${cart.length}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>

@@ -1,3 +1,9 @@
 .colorful {
   color: $clrHilight;
 }
+
+.main_content {
+  input.search_input {
+    width: 90%;
+  }
+}
