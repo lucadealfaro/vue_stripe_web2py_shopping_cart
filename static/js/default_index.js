@@ -21,6 +21,9 @@ var app = function() {
 
     self.get_products = function () {
         // Gets new products in response to a query, or to an initial page load.
+        $.getJSON(products_url, $.param({q: self.vue.product_search}), function(data) {
+            self.vue.products = data.products;
+        });
     };
 
 
@@ -29,11 +32,12 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-            product_list: [],
-            cart: []
+            products: [],
+            cart: [],
+            product_search: ''
         },
         methods: {
-            get_products: self.get_products()
+            get_products: self.get_products
         }
 
     });

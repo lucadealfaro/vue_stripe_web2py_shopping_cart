@@ -20,6 +20,25 @@ def index():
     return dict()
 
 
+def get_products():
+    """Gets the list of products, possibly in response to a query."""
+    t = request.vars.q.strip()
+    if request.vars.q:
+        q = ((db.product.name.contains(t)) |
+             (db.product.description.contains(t)))
+    else:
+        q = db.product.id > 0
+    products = db(q).select(db.product.ALL)
+    # Fixes some fields, to make it easy on the client side.
+    for p in products:
+        logger.info("p: %r", p)
+        p.image_url = URL('download', p.image)
+        p.desired_quantity = min(1, p.quantity)
+    return response.json(dict(
+        products=products,
+    ))
+
+
 # Normally here we would check that the user is an admin, and do programmatic
 # APIs to add and remove products to the inventory, etc.
 @auth.requires_login()
