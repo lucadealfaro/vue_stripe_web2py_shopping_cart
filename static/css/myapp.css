@@ -34,16 +34,20 @@
   max-width: 300px;
 }
 /* line 30, ../sass/_main.scss */
+.main_content .prod_image {
+  display: block;
+}
+/* line 33, ../sass/_main.scss */
 .main_content .shopping_button {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/* line 34, ../sass/_main.scss */
+/* line 37, ../sass/_main.scss */
 .main_content .search_div {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/* line 38, ../sass/_main.scss */
+/* line 41, ../sass/_main.scss */
 .main_content .shopping_cart_title {
   font-size: 250%;
 }

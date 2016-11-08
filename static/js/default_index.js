@@ -38,11 +38,11 @@ var app = function() {
     self.count_cart = function () {
         var cart_size = 0;
         var cart_total = 0;
-        for (var i = 0; i < self.vue.products.length; i++) {
-            var q = self.vue.products[i].cart_quantity;
+        for (var i = 0; i < self.vue.cart.length; i++) {
+            var q = self.vue.cart[i].cart_quantity;
             if (q > 0) {
                 cart_size++;
-                cart_total += q * self.vue.products[i].price;
+                cart_total += q * self.vue.cart[i].price;
             }
         }
         self.vue.cart_size = cart_size;
@@ -51,7 +51,23 @@ var app = function() {
 
     self.buy_product = function(product_idx) {
         var p = self.vue.products[product_idx];
-        p.cart_quantity = p.desired_quantity;
+        // I need to put the product in the cart.
+        // Check if it is already there.
+        var already_present = false;
+        var found_idx = 0;
+        for (var i = 0; i < self.vue.cart.length; i++) {
+            if (self.vue.cart[i].id === p.id) {
+                already_present = true;
+                found_idx = i;
+            }
+        }
+        // If it's there, just replace the quantity; otherwise, insert it.
+        if (!already_present) {
+            found_idx = self.vue.cart.length;
+            self.vue.cart.push(p);
+        }
+        self.vue.cart[found_idx].cart_quantity = p.desired_quantity;
+
         // Updates the amount of products in the cart.
         self.count_cart();
     };

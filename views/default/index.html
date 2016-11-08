@@ -38,10 +38,10 @@
 
         <div id="products_list">
             <div v-for="product in products">
-                <div class="col-md-3">
+                <div class="col-md-3 prod_image">
                     <img v-bind:src="product.image_url" width="100%" class="product_image"/>
                 </div>
-                <div class="col-md-7 product_info">
+                <div class="col-md-10 product_info">
                     <div class="product_name"><h2>${product.product_name}</h2></div>
                     <div class="product_quantity_price">
                         <span class="product_price">$ ${product.price}</span>
@@ -56,7 +56,9 @@
                     <div class="product_description">
                         <p>${product.description}</p>
                     </div>
+
                 </div>
+
             </div>
         </div>
 
