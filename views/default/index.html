@@ -12,12 +12,12 @@
         <div class="control_bar">
             <div class="search_div col-md-9">
                 <span v-if="!show_cart">
-                <input class="search_input" v-model="product_search"/>
-                <button class="btn btn-success"><i class="fa fa-search fa-lg"></i></button>
+                    <input class="search_input" v-model="product_search"/>
+                    <button class="btn btn-success"><i class="fa fa-search fa-lg"></i></button>
                 </span>
                 <span v-if="show_cart" class="shopping_cart_title"><i class="fa fa-shopping-cart"></i> Your Shopping Cart</span>
             </div>
-            <div class="shopping_button pull-right">
+            <div class="shopping_button col-md-3">
                 <span v-if="!show_cart">
                 <button class="btn btn-warning" v-on:click="toggle_show_cart()">
                     <i class="fa fa-lg fa-shopping-cart"></i> ${cart_size}
