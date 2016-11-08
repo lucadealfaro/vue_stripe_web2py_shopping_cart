@@ -23,7 +23,15 @@ var app = function() {
         // Gets new products in response to a query, or to an initial page load.
         $.getJSON(products_url, $.param({q: self.vue.product_search}), function(data) {
             self.vue.products = data.products;
+            enumerate(self.vue.products);
         });
+    };
+
+
+    self.inc_desired_quantity = function(product_idx, qty) {
+        var p = self.vue.products[product_idx];
+        p.desired_quantity = Math.max(0, p.desired_quantity + qty);
+        p.desired_quantity = Math.min(p.quantity, p.desired_quantity);
     };
 
 
@@ -37,7 +45,8 @@ var app = function() {
             product_search: ''
         },
         methods: {
-            get_products: self.get_products
+            get_products: self.get_products,
+            inc_desired_quantity: self.inc_desired_quantity
         }
 
     });
