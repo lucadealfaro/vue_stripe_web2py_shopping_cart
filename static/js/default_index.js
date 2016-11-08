@@ -37,12 +37,16 @@ var app = function() {
 
     self.count_cart = function () {
         var cart_size = 0;
+        var cart_total = 0;
         for (var i = 0; i < self.vue.products.length; i++) {
-            if (self.vue.products[i].cart_quantity > 0) {
+            var q = self.vue.products[i].cart_quantity;
+            if (q > 0) {
                 cart_size++;
+                cart_total += q * self.vue.products[i].price;
             }
         }
         self.vue.cart_size = cart_size;
+        self.vue.cart_total = cart_total;
     };
 
     self.buy_product = function(product_idx) {
@@ -65,6 +69,7 @@ var app = function() {
             cart: [],
             product_search: '',
             cart_size: 0,
+            cart_total: 0,
             show_cart: false
         },
         methods: {
