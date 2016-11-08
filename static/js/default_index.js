@@ -29,9 +29,27 @@ var app = function() {
 
 
     self.inc_desired_quantity = function(product_idx, qty) {
+        // Inc and dec to desired quantity.
         var p = self.vue.products[product_idx];
         p.desired_quantity = Math.max(0, p.desired_quantity + qty);
         p.desired_quantity = Math.min(p.quantity, p.desired_quantity);
+    };
+
+    self.count_cart = function () {
+        var cart_size = 0;
+        for (var i = 0; i < self.vue.products.length; i++) {
+            if (self.vue.products[i].cart_quantity > 0) {
+                cart_size++;
+            }
+        }
+        self.vue.cart_size = cart_size;
+    };
+
+    self.buy_product = function(product_idx) {
+        var p = self.vue.products[product_idx];
+        p.cart_quantity = p.desired_quantity;
+        // Updates the amount of products in the cart.
+        self.count_cart();
     };
 
 
@@ -42,11 +60,13 @@ var app = function() {
         data: {
             products: [],
             cart: [],
-            product_search: ''
+            product_search: '',
+            cart_size: 0
         },
         methods: {
             get_products: self.get_products,
-            inc_desired_quantity: self.inc_desired_quantity
+            inc_desired_quantity: self.inc_desired_quantity,
+            buy_product: self.buy_product
         }
 
     });

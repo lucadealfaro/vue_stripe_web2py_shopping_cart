@@ -6,6 +6,11 @@
   input.search_input {
     width: 90%;
   }
+  button:focus {
+    // Please no silly leftover border.
+    border-color: white;
+    outline: none;
+  }
   div.product_description {
     margin-top: 15px;
   }

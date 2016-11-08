@@ -16,7 +16,7 @@
             </div>
             <div class="shopping_button pull-right">
                 <button class="btn btn-warning">
-                    <i class="fa fa-lg fa-shopping-cart"></i> ${cart.length}
+                    <i class="fa fa-lg fa-shopping-cart"></i> ${cart_size}
                 </button>
             </div>
         </div>
@@ -35,7 +35,7 @@
                             <button class="btn btn-secondary" v-on:click="inc_desired_quantity(product._idx, 1)"><i class="fa fa-plus"></i></button>
                             <span class="desired_quantity">${product.desired_quantity}</span>
                             <button class="btn btn-secondary" v-on:click="inc_desired_quantity(product._idx, -1)"><i class="fa fa-minus"></i></button>
-                            <button class="btn btn-danger"><i class="fa fa-lg fa-shopping-cart"></i> Buy</button>
+                            <button class="btn btn-danger" v-on:click="buy_product(product._idx)"><i class="fa fa-lg fa-shopping-cart"></i> Buy</button>
                         </span>
                     </div>
                     <div class="product_description">

@@ -34,6 +34,7 @@ def get_products():
         logger.info("p: %r", p)
         p.image_url = URL('download', p.image)
         p.desired_quantity = min(1, p.quantity)
+        p.cart_quantity = 0
     return response.json(dict(
         products=products,
     ))

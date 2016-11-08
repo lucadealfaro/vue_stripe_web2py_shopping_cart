@@ -8,32 +8,37 @@
   width: 90%;
 }
 /* line 9, ../sass/_main.scss */
+.main_content button:focus {
+  border-color: white;
+  outline: none;
+}
+/* line 14, ../sass/_main.scss */
 .main_content div.product_description {
   margin-top: 15px;
 }
-/* line 12, ../sass/_main.scss */
+/* line 17, ../sass/_main.scss */
 .main_content span.buy_buttons {
   margin-left: 30px;
 }
-/* line 15, ../sass/_main.scss */
+/* line 20, ../sass/_main.scss */
 .main_content span.product_quantity {
   margin-left: 30px;
 }
-/* line 18, ../sass/_main.scss */
+/* line 23, ../sass/_main.scss */
 .main_content span.product_price {
   font-size: 140%;
   font-weight: bold;
 }
-/* line 22, ../sass/_main.scss */
+/* line 27, ../sass/_main.scss */
 .main_content .product_image {
   max-width: 300px;
 }
-/* line 25, ../sass/_main.scss */
+/* line 30, ../sass/_main.scss */
 .main_content .shopping_button {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/* line 29, ../sass/_main.scss */
+/* line 34, ../sass/_main.scss */
 .main_content .search_div {
   margin-top: 10px;
   margin-bottom: 10px;
