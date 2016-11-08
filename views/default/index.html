@@ -11,15 +11,30 @@
     <div id="vue-div" style="display:none">
         <div class="control_bar">
             <div class="search_div col-md-9">
+                <span v-if="!show_cart">
                 <input class="search_input" v-model="product_search"/>
                 <button class="btn btn-success"><i class="fa fa-search fa-lg"></i></button>
+                </span>
+                <span v-if="show_cart" class="shopping_cart_title"><i class="fa fa-shopping-cart"></i> Your Shopping Cart</span>
             </div>
             <div class="shopping_button pull-right">
-                <button class="btn btn-warning">
+                <span v-if="!show_cart">
+                <button class="btn btn-warning" v-on:click="toggle_show_cart()">
                     <i class="fa fa-lg fa-shopping-cart"></i> ${cart_size}
                 </button>
+                </span>
+                <span v-if="show_cart">
+                    <button class="btn btn-success" v-on:click="toggle_show_cart()">
+                        Continue shopping
+                    </button>
+                    <button class="btn btn-primary">
+                        Checkout
+                    </button>
+                </span>
             </div>
         </div>
+
+        <div class="clearfix visible-xs-block"></div>
 
         <div id="products_list">
             <div v-for="product in products">

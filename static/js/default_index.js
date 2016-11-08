@@ -52,6 +52,9 @@ var app = function() {
         self.count_cart();
     };
 
+    self.toggle_show_cart = function () {
+        self.vue.show_cart = !self.vue.show_cart;
+    };
 
     self.vue = new Vue({
         el: "#vue-div",
@@ -61,12 +64,14 @@ var app = function() {
             products: [],
             cart: [],
             product_search: '',
-            cart_size: 0
+            cart_size: 0,
+            show_cart: false
         },
         methods: {
             get_products: self.get_products,
             inc_desired_quantity: self.inc_desired_quantity,
-            buy_product: self.buy_product
+            buy_product: self.buy_product,
+            toggle_show_cart: self.toggle_show_cart
         }
 
     });

@@ -43,3 +43,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+/* line 38, ../sass/_main.scss */
+.main_content .shopping_cart_title {
+  font-size: 250%;
+}
