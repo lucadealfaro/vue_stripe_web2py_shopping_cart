@@ -17,8 +17,25 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
-    response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+    return dict()
+
+
+# Normally here we would check that the user is an admin, and do programmatic
+# APIs to add and remove products to the inventory, etc.
+@auth.requires_login()
+def product_management():
+    q = db.product # This queries for all products.
+    form = SQLFORM.grid(
+        q,
+        editable=True,
+        create=True,
+        user_signature=True,
+        deletable=True,
+        fields=[db.product.product_name, db.product.quantity, db.product.price,
+                db.product.image],
+        details=True,
+    )
+    return dict(form=form)
 
 
 def user():

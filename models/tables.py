@@ -8,7 +8,15 @@
 # Consult manual for more options, validators, etc.
 
 
-
+# Product table.
+db.define_table('product',
+    Field('product_name'),
+    Field('quantity', 'integer'),
+    Field('price', 'float'),
+    Field('image', 'upload'),
+    Field('description', 'text'),
+)
+db.product.id.readable = db.product.id.writable = False
 
 # after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
