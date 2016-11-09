@@ -28,12 +28,13 @@ var app = function() {
     };
 
     self.post_cart = function() {
-        $.post(post_cart_url, {cart: self.vue.cart});
+        $.post(post_cart_url, {cart: JSON.stringify(self.vue.cart)});
     };
 
     self.get_cart = function() {
         $.getJSON(get_cart_url, {}, function (data) {
-           self.vue.cart = data.cart;
+            self.vue.cart = data.cart;
+            self.update_cart();
         });
     };
 
@@ -49,10 +50,11 @@ var app = function() {
         var p = self.vue.cart[product_idx];
         p.cart_quantity = Math.max(0, p.cart_quantity + qty);
         p.cart_quantity = Math.min(p.quantity, p.cart_quantity);
-        self.update_and_sync_cart();
+        self.update_cart();
+        self.post_cart();
     };
 
-    self.update_and_sync_cart = function () {
+    self.update_cart = function () {
         enumerate(self.vue.cart);
         var cart_size = 0;
         var cart_total = 0;
@@ -65,7 +67,6 @@ var app = function() {
         }
         self.vue.cart_size = cart_size;
         self.vue.cart_total = cart_total;
-        self.post_cart();
     };
 
     self.buy_product = function(product_idx) {
@@ -88,7 +89,8 @@ var app = function() {
         self.vue.cart[found_idx].cart_quantity = p.desired_quantity;
 
         // Updates the amount of products in the cart.
-        self.update_and_sync_cart();
+        self.update_cart();
+        self.post_cart();
     };
 
     self.toggle_show_cart = function () {
@@ -120,7 +122,6 @@ var app = function() {
 
     self.get_products();
     self.get_cart();
-    self.update_and_sync_cart();
     $("#vue-div").show();
     return self;
 };

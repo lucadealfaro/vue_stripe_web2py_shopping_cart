@@ -8,6 +8,7 @@
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
 
+import json
 
 def index():
     """
@@ -27,7 +28,6 @@ def get_products():
     products = db(q).select(db.product.ALL)
     # Fixes some fields, to make it easy on the client side.
     for p in products:
-        logger.info("p: %r", p)
         p.image_url = URL('download', p.image)
         p.desired_quantity = min(1, p.quantity)
         p.cart_quantity = 0
@@ -35,12 +35,12 @@ def get_products():
         products=products,
     ))
 
+
 def get_cart():
     return response.json(dict(cart=session.cart or []))
 
 def post_cart():
-    session.cart = request.vars.cart
-
+    session.cart = json.loads(request.vars.cart)
 
 # Normally here we would check that the user is an admin, and do programmatic
 # APIs to add and remove products to the inventory, etc.
