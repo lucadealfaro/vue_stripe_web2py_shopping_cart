@@ -35,6 +35,12 @@ def get_products():
         products=products,
     ))
 
+def get_cart():
+    return response.json(dict(cart=session.cart or []))
+
+def post_cart():
+    session.cart = request.vars.cart
+
 
 # Normally here we would check that the user is an admin, and do programmatic
 # APIs to add and remove products to the inventory, etc.
