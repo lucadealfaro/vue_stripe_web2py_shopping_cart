@@ -28,14 +28,16 @@ var app = function() {
     };
 
     self.post_cart = function() {
-        $.post(post_cart_url, {cart: JSON.stringify(self.vue.cart)});
+        localStorage.cart = JSON.stringify(self.vue.cart);
     };
 
     self.get_cart = function() {
-        $.getJSON(get_cart_url, {}, function (data) {
-            self.vue.cart = data.cart;
-            self.update_cart();
-        });
+        if (localStorage.cart) {
+            self.vue.cart = JSON.parse(localStorage.cart);
+        } else {
+            self.vue.cart = [];
+        }
+        self.update_cart();
     };
 
     self.inc_desired_quantity = function(product_idx, qty) {
