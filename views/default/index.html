@@ -78,27 +78,12 @@
                     </div>
                 </div>
             </div>
-            <div class="total_price">Your total price: $ ${cart_total}</div>
-        </div>
-
-    </div>
-
-    <div class="container">
-        <div class="center">
-            <div id="pay_page" style="display:none">
-                <form action="{{=URL('default', 'payment_complete')}}" id="stripe-form" method="POST">
-                    <script
-                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                            data-key="pk_test_CeE2VVxAs3MWCUDMQpWe8KcX"
-                            data-amount="2000"
-                            data-name="Demo Site"
-                            data-description="2 widgets"
-                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                            data-locale="auto">
-                    </script>
-                </form>
+            <div class="total_price">
+                Your total price: $ ${cart_total}
+                <button class="btn blue" v-on:click="pay()"><i class="fa fa-credit-card"></i> Pay</button>
             </div>
         </div>
+
     </div>
 
 </div>

@@ -99,13 +99,23 @@ var app = function() {
         self.vue.page = page;
         if (page == 'cart') {
             // prepares the form.
-            $("#stripe-form script").attr('data-amount', self.vue.cart_total);
-            $("#pay_page").show();
-        } else {
-            $("#pay_page").hide();
+            this.stripe_instance = StripeCheckout.configure({
+            key: 'pk_test_CeE2VVxAs3MWCUDMQpWe8KcX',    //put your own publishable key here
+            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            locale: 'auto',
+            token: function(token) {
+              console.log('got a token. sending data to localhost');
+              myApp.stripe_token= token;
+              myApp.sendData2Server();
+            }
+          });
         }
 
     };
+
+    self.pay = function () {
+
+    }
 
     self.vue = new Vue({
         el: "#vue-div",
@@ -125,7 +135,8 @@ var app = function() {
             inc_cart_quantity: self.inc_cart_quantity,
             buy_product: self.buy_product,
             goto: self.goto,
-            do_search: self.get_products
+            do_search: self.get_products,
+            pay: self.pay
         }
 
     });
@@ -133,6 +144,7 @@ var app = function() {
     self.get_products();
     self.get_cart();
     $("#vue-div").show();
+
     return self;
 };
 
