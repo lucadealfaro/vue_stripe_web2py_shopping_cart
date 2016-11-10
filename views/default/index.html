@@ -2,6 +2,7 @@
 
 {{block head}}
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
     var products_url = "{{=URL('default', 'get_products')}}";
     var get_cart_url = "{{=URL('default', 'get_cart')}}";
@@ -80,7 +81,7 @@
             </div>
             <div class="total_price">
                 Your total price: $ ${cart_total}
-                <button class="btn blue" v-on:click="pay()"><i class="fa fa-credit-card"></i> Pay</button>
+                <button class="btn blue" v-on:click="pay()"><i class="fa fa-lg fa-credit-card"></i> Pay</button>
             </div>
         </div>
 

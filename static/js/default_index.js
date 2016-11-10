@@ -99,14 +99,14 @@ var app = function() {
         self.vue.page = page;
         if (page == 'cart') {
             // prepares the form.
-            this.stripe_instance = StripeCheckout.configure({
+            self.stripe_instance = StripeCheckout.configure({
             key: 'pk_test_CeE2VVxAs3MWCUDMQpWe8KcX',    //put your own publishable key here
             image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
             locale: 'auto',
             token: function(token) {
               console.log('got a token. sending data to localhost');
-              myApp.stripe_token= token;
-              myApp.sendData2Server();
+              self.stripe_token= token;
+              self.send_data_to_server();
             }
           });
         }
@@ -114,8 +114,16 @@ var app = function() {
     };
 
     self.pay = function () {
+        self.stripe_instance.open({
+            name: "Your nice cart",
+            description: "Buy cart content",
+            amount: self.vue.cart_total
+        });
+    };
 
-    }
+    self.send_data_to_server = function () {
+        console.log("Payment for:", self.stripe_token);
+    };
 
     self.vue = new Vue({
         el: "#vue-div",
@@ -127,7 +135,7 @@ var app = function() {
             product_search: '',
             cart_size: 0,
             cart_total: 0,
-            page: 'prod',
+            page: 'prod'
         },
         methods: {
             get_products: self.get_products,
@@ -144,6 +152,7 @@ var app = function() {
     self.get_products();
     self.get_cart();
     $("#vue-div").show();
+
 
     return self;
 };
