@@ -102,9 +102,9 @@ var app = function() {
         if (page == 'cart') {
             // prepares the form.
             self.stripe_instance = StripeCheckout.configure({
-            key: 'pk_test_CeE2VVxAs3MWCUDMQpWe8KcX',    //put your own publishable key here
-            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-            locale: 'auto',
+                key: 'pk_test_CeE2VVxAs3MWCUDMQpWe8KcX',    //put your own publishable key here
+                image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                locale: 'auto',
                 token: function(token, args) {
                     console.log('got a token. sending data to localhost.');
                     self.stripe_token = token;
@@ -132,6 +132,7 @@ var app = function() {
         $.post(purchase_url,
             {
                 customer_info: JSON.stringify(self.customer_info),
+                transaction_token: JSON.stringify(self.stripe_token),
                 cart: JSON.stringify(self.vue.cart),
             },
             function (data) {

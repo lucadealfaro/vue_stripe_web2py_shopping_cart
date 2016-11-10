@@ -36,7 +36,10 @@ def purchase():
     """Ajax function called when a customer orders and pays for the cart."""
     if not URL.verify(request, hmac_key=session.hmac_key):
         raise HTTP(500)
-    db.customer_order.insert(customer_info=request.vars.customer_info, cart=request.vars.cart)
+    db.customer_order.insert(
+        customer_info=request.vars.customer_info,
+        transaction_token=request.vars.transaction_token,
+        cart=request.vars.cart)
     return "ok"
 
 
@@ -53,6 +56,22 @@ def product_management():
         deletable=True,
         fields=[db.product.product_name, db.product.quantity, db.product.price,
                 db.product.image],
+        details=True,
+    )
+    return dict(form=form)
+
+
+@auth.requires_login()
+def view_orders():
+    q = db.customer_order # This queries for all products.
+    # db.customer_order.customer_info.represent = lambda v, r: nicefy(v)
+    # db.customer_order.transaction_token.represent = lambda v, r: nicefy(v)
+    form = SQLFORM.grid(
+        q,
+        editable=True,
+        create=True,
+        user_signature=True,
+        deletable=True,
         details=True,
     )
     return dict(form=form)

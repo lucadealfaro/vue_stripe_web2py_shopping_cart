@@ -22,6 +22,7 @@ db.product.id.readable = db.product.id.writable = False
 db.define_table('customer_order',
     Field('order_date', default=datetime.datetime.utcnow()),
     Field('customer_info', 'blob'),
+    Field('transaction_token', 'blob'),
     Field('cart', 'blob'),
 )
 
@@ -33,3 +34,10 @@ if session.hmac_key is None:
 
 # after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
+
+import json
+
+def nicefy(b):
+    obj = json.loads(b)
+    s = json.dumps(obj, indent=2)
+    return s
