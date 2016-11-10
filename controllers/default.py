@@ -2,13 +2,9 @@
 # this file is released under public domain and you can use without limitations
 
 # -------------------------------------------------------------------------
-# This is a sample controller
-# - index is the default action of any application
-# - user is required for authentication and authorization
-# - download is for downloading files uploaded in the db (does streaming)
+# Sample shopping cart implementation.
 # -------------------------------------------------------------------------
 
-import json
 
 def index():
     """
@@ -36,14 +32,11 @@ def get_products():
     ))
 
 
-def payment_complete():
-    return dict()
+def purchase():
+    """Ajax function called when a customer orders and pays for the cart."""
+    db.customer_order.insert(customer_info=request.vars.customer_info, cart=request.vars.cart)
+    return "ok"
 
-def get_cart():
-    return response.json(dict(cart=session.cart or []))
-
-def post_cart():
-    session.cart = json.loads(request.vars.cart)
 
 # Normally here we would check that the user is an admin, and do programmatic
 # APIs to add and remove products to the inventory, etc.

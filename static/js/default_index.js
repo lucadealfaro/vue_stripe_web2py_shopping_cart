@@ -27,11 +27,11 @@ var app = function() {
         });
     };
 
-    self.post_cart = function() {
+    self.store_cart = function() {
         localStorage.cart = JSON.stringify(self.vue.cart);
     };
 
-    self.get_cart = function() {
+    self.read_cart = function() {
         if (localStorage.cart) {
             self.vue.cart = JSON.parse(localStorage.cart);
         } else {
@@ -53,7 +53,7 @@ var app = function() {
         p.cart_quantity = Math.max(0, p.cart_quantity + qty);
         p.cart_quantity = Math.min(p.quantity, p.cart_quantity);
         self.update_cart();
-        self.post_cart();
+        self.store_cart();
     };
 
     self.update_cart = function () {
@@ -92,8 +92,10 @@ var app = function() {
 
         // Updates the amount of products in the cart.
         self.update_cart();
-        self.post_cart();
+        self.store_cart();
     };
+
+    self.customer_info = {}
 
     self.goto = function (page) {
         self.vue.page = page;
@@ -103,13 +105,14 @@ var app = function() {
             key: 'pk_test_CeE2VVxAs3MWCUDMQpWe8KcX',    //put your own publishable key here
             image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
             locale: 'auto',
-            token: function(token) {
-              console.log('got a token. sending data to localhost');
-              self.stripe_token= token;
-              self.send_data_to_server();
-            }
-          });
-        }
+                token: function(token, args) {
+                    console.log('got a token. sending data to localhost.');
+                    self.stripe_token = token;
+                    self.customer_info = args;
+                    self.send_data_to_server();
+                }
+            });
+        };
 
     };
 
@@ -117,12 +120,29 @@ var app = function() {
         self.stripe_instance.open({
             name: "Your nice cart",
             description: "Buy cart content",
-            amount: self.vue.cart_total
+            billingAddress: true,
+            shippingAddress: true,
+            amount: Math.round(self.vue.cart_total * 100),
         });
     };
 
     self.send_data_to_server = function () {
-        console.log("Payment for:", self.stripe_token);
+        console.log("Payment for:", self.customer_info);
+        // Calls the server.
+        $.post(purchase_url,
+            {
+                customer_info: JSON.stringify(self.customer_info),
+                cart: JSON.stringify(self.vue.cart),
+            },
+            function (data) {
+                // The order was successful.
+                self.vue.cart = [];
+                self.update_cart();
+                self.store_cart();
+                self.goto('prod');
+                $.web2py.flash("Thank you for your purchase");
+            }
+        );
     };
 
     self.vue = new Vue({
@@ -150,7 +170,7 @@ var app = function() {
     });
 
     self.get_products();
-    self.get_cart();
+    self.read_cart();
     $("#vue-div").show();
 
 

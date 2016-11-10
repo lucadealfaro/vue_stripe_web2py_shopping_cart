@@ -5,8 +5,7 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
     var products_url = "{{=URL('default', 'get_products')}}";
-    var get_cart_url = "{{=URL('default', 'get_cart')}}";
-    var post_cart_url = "{{=URL('default', 'post_cart')}}";
+    var purchase_url = "{{=URL('default', 'purchase')}}"
 </script>
 {{end}}
 
@@ -59,6 +58,11 @@
         </div>
 
         <div v-if="page=='cart'" id="cart_list">
+            <div v-if="cart.length == 0" class="container">
+                <div class="cart_empty_msg">
+                    Your cart is empty
+                </div>
+            </div>
             <div v-for="product in cart" class="container">
                 <div class="col-md-3 prod_image third">
                     <img v-bind:src="product.image_url" width="100%" class="product_image"/>
@@ -79,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="total_price">
+            <div v-if="cart.length > 0" class="total_price">
                 Your total price: $ ${cart_total}
                 <button class="btn blue" v-on:click="pay()"><i class="fa fa-lg fa-credit-card"></i> Pay</button>
             </div>

@@ -7,6 +7,7 @@
 # There is an implicit 'id integer autoincrement' field
 # Consult manual for more options, validators, etc.
 
+import datetime
 
 # Product table.
 db.define_table('product',
@@ -17,6 +18,12 @@ db.define_table('product',
     Field('description', 'text'),
 )
 db.product.id.readable = db.product.id.writable = False
+
+db.define_table('customer_order',
+    Field('order_date', default=datetime.datetime.utcnow()),
+    Field('customer_info', 'blob'),
+    Field('cart', 'blob'),
+)
 
 # after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
