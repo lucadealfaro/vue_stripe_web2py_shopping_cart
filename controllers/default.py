@@ -64,8 +64,9 @@ def product_management():
 @auth.requires_login()
 def view_orders():
     q = db.customer_order # This queries for all products.
-    # db.customer_order.customer_info.represent = lambda v, r: nicefy(v)
-    # db.customer_order.transaction_token.represent = lambda v, r: nicefy(v)
+    db.customer_order.customer_info.represent = lambda v, r: nicefy(v)
+    db.customer_order.transaction_token.represent = lambda v, r: nicefy(v)
+    db.customer_order.cart.represent = lambda v, r: nicefy(v)
     form = SQLFORM.grid(
         q,
         editable=True,

@@ -38,6 +38,8 @@ if session.hmac_key is None:
 import json
 
 def nicefy(b):
+    if b is None:
+        return 'None'
     obj = json.loads(b)
     s = json.dumps(obj, indent=2)
     return s
