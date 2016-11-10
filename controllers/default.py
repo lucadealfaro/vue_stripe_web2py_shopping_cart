@@ -36,6 +36,9 @@ def get_products():
     ))
 
 
+def payment_complete():
+    return dict()
+
 def get_cart():
     return response.json(dict(cart=session.cart or []))
 

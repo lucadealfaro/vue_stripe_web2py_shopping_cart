@@ -18,7 +18,6 @@
                     <button class="btn" v-on:click="do_search"><i class="fa fa-search fa-lg"></i></button>
                 </span>
                 <span v-if="page=='cart'" class="page_title"><i class="fa fa-shopping-cart"></i> Your Shopping Cart</span>
-                <span v-if="page=='addr'" class="page_title"><i class="fa fa-map"></i> Shipping address</span>
             </div>
             <div class="shopping_button quarter">
                 <span v-if="page=='prod'">
@@ -28,11 +27,6 @@
                 </span>
                 <span v-if="page=='cart'">
                     <button class="btn" v-on:click="goto('prod')"> Continue shopping </button>
-                    <button class="btn red" v-on:click="goto('addr')"> Checkout </button>
-                </span>
-                <span v-if="page=='addr'">
-                    <button class="btn" v-on:click="goto('prod')">Continue shopping</button>
-                    <button class="btn red" v-on:click="goto('pay')"><i class="fa fa-credit-card"></i> Pay</button>
                 </span>
             </div>
         </div>
@@ -87,17 +81,26 @@
             <div class="total_price">Your total price: $ ${cart_total}</div>
         </div>
 
-        <div v-if="page=='addr'" id="address_page">
-            <input v-bind="shipping.name" placeholder="Your name"/>
-            <input v-bind="shipping.addr1" placeholder="Street address" />
-            <input v-bind="shipping.addr2" placeholder="Apartment, suite, building, etc." />
-            <input v-bind="shipping.city" placeholder="City" />
-            <input v-bind="shipping.state" placeholder="State" />
-            <input v-bind="shipping.phone" placeholder="Phone number" />
-        </div>
-
-
     </div>
+
+    <div class="container">
+        <div class="center">
+            <div id="pay_page" style="display:none">
+                <form action="{{=URL('default', 'payment_complete')}}" id="stripe-form" method="POST">
+                    <script
+                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="pk_test_CeE2VVxAs3MWCUDMQpWe8KcX"
+                            data-amount="2000"
+                            data-name="Demo Site"
+                            data-description="2 widgets"
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto">
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>

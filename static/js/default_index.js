@@ -97,14 +97,14 @@ var app = function() {
 
     self.goto = function (page) {
         self.vue.page = page;
-    };
+        if (page == 'cart') {
+            // prepares the form.
+            $("#stripe-form script").attr('data-amount', self.vue.cart_total);
+            $("#pay_page").show();
+        } else {
+            $("#pay_page").hide();
+        }
 
-    var initial_address = {
-        addr1: '',
-        addr2: '',
-        city: '',
-        state: '',
-        phone: ''
     };
 
     self.vue = new Vue({
@@ -118,14 +118,6 @@ var app = function() {
             cart_size: 0,
             cart_total: 0,
             page: 'prod',
-            ship_name: '',
-            shipping: {
-                addr1: '',
-                addr2: '',
-                city: '',
-                state: '',
-                phone: ''
-            }
         },
         methods: {
             get_products: self.get_products,
