@@ -13,32 +13,31 @@
     <div id="vue-div" style="display:none">
         <div class="control_bar container">
             <div class="search_div threequarters">
-                <span v-if="page=='prods'">
+                <span v-if="page=='prod'">
                     <input class="search_input" v-model="product_search"/>
                     <button class="btn" v-on:click="do_search"><i class="fa fa-search fa-lg"></i></button>
                 </span>
-                <span v-if="page=='cart'" class="shopping_cart_title"><i class="fa fa-shopping-cart"></i> Your Shopping Cart</span>
+                <span v-if="page=='cart'" class="page_title"><i class="fa fa-shopping-cart"></i> Your Shopping Cart</span>
+                <span v-if="page=='addr'" class="page_title"><i class="fa fa-map"></i> Shipping address</span>
             </div>
             <div class="shopping_button quarter">
-                <span v-if="page=='prods'">
-                <button class="btn orange" v-on:click="goto('cart')">
-                    <i class="fa fa-lg fa-shopping-cart"></i> ${cart_size}
-                </button>
+                <span v-if="page=='prod'">
+                    <button class="btn orange" v-on:click="goto('cart')">
+                        <i class="fa fa-lg fa-shopping-cart"></i> ${cart_size}
+                    </button>
                 </span>
                 <span v-if="page=='cart'">
-                    <button class="btn btn-success" v-on:click="goto('prods')">
-                        Continue shopping
-                    </button>
-                    <button class="btn btn-primary" v-on:click="goto('address')">
-                        Checkout
-                    </button>
+                    <button class="btn" v-on:click="goto('prod')"> Continue shopping </button>
+                    <button class="btn red" v-on:click="goto('addr')"> Checkout </button>
+                </span>
+                <span v-if="page=='addr'">
+                    <button class="btn" v-on:click="goto('prod')">Continue shopping</button>
+                    <button class="btn red" v-on:click="goto('pay')"><i class="fa fa-credit-card"></i> Pay</button>
                 </span>
             </div>
         </div>
 
-        <div class="clearfix visible-xs-block"></div>
-
-        <div v-if="page=='prods'" id="products_list">
+        <div v-if="page=='prod'" id="products_list">
             <div v-for="product in products" class="container">
                 <div class="third prod_image">
                     <img v-bind:src="product.image_url" width="100%" class="product_image"/>
@@ -87,6 +86,16 @@
             </div>
             <div class="total_price">Your total price: $ ${cart_total}</div>
         </div>
+
+        <div v-if="page=='addr'" id="address_page">
+            <input v-bind="shipping.name" placeholder="Your name"/>
+            <input v-bind="shipping.addr1" placeholder="Street address" />
+            <input v-bind="shipping.addr2" placeholder="Apartment, suite, building, etc." />
+            <input v-bind="shipping.city" placeholder="City" />
+            <input v-bind="shipping.state" placeholder="State" />
+            <input v-bind="shipping.phone" placeholder="Phone number" />
+        </div>
+
 
     </div>
 </div>

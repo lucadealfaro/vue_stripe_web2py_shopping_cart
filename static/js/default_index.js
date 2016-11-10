@@ -99,6 +99,14 @@ var app = function() {
         self.vue.page = page;
     };
 
+    var initial_address = {
+        addr1: '',
+        addr2: '',
+        city: '',
+        state: '',
+        phone: ''
+    };
+
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
@@ -109,7 +117,15 @@ var app = function() {
             product_search: '',
             cart_size: 0,
             cart_total: 0,
-            page: 'prods'
+            page: 'prod',
+            ship_name: '',
+            shipping: {
+                addr1: '',
+                addr2: '',
+                city: '',
+                state: '',
+                phone: ''
+            }
         },
         methods: {
             get_products: self.get_products,
