@@ -2,14 +2,15 @@
   color: $clrHilight;
 }
 
-.main_content {
-  input.search_input {
-    width: 90%;
-  }
+div.main_content {
+  margin: 20px;
   button:focus {
     // Please no silly leftover border.
     border-color: white;
     outline: none;
+  }
+  input.search_input {
+    width: 80% !important;
   }
   div.product_description {
     margin-top: 15px;
@@ -27,9 +28,6 @@
   .product_image {
     max-width: 300px;
   }
-  .prod_image {
-    display: block;
-  }
   .shopping_button {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -40,5 +38,8 @@
   }
   .shopping_cart_title {
     font-size: 250%;
+  }
+  .total_price {
+    font-size: 150%;
   }
 }

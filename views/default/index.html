@@ -11,25 +11,25 @@
 
 <div class="main_content">
     <div id="vue-div" style="display:none">
-        <div class="control_bar">
-            <div class="search_div col-md-9">
-                <span v-if="!show_cart">
+        <div class="control_bar container">
+            <div class="search_div threequarters">
+                <span v-if="page=='prods'">
                     <input class="search_input" v-model="product_search"/>
-                    <button class="btn btn-success" v-on:click="do_search"><i class="fa fa-search fa-lg"></i></button>
+                    <button class="btn" v-on:click="do_search"><i class="fa fa-search fa-lg"></i></button>
                 </span>
-                <span v-if="show_cart" class="shopping_cart_title"><i class="fa fa-shopping-cart"></i> Your Shopping Cart</span>
+                <span v-if="page=='cart'" class="shopping_cart_title"><i class="fa fa-shopping-cart"></i> Your Shopping Cart</span>
             </div>
-            <div class="shopping_button col-md-3">
-                <span v-if="!show_cart">
-                <button class="btn btn-warning" v-on:click="toggle_show_cart()">
+            <div class="shopping_button quarter">
+                <span v-if="page=='prods'">
+                <button class="btn orange" v-on:click="goto('cart')">
                     <i class="fa fa-lg fa-shopping-cart"></i> ${cart_size}
                 </button>
                 </span>
-                <span v-if="show_cart">
-                    <button class="btn btn-success" v-on:click="toggle_show_cart()">
+                <span v-if="page=='cart'">
+                    <button class="btn btn-success" v-on:click="goto('prods')">
                         Continue shopping
                     </button>
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" v-on:click="goto('address')">
                         Checkout
                     </button>
                 </span>
@@ -38,12 +38,12 @@
 
         <div class="clearfix visible-xs-block"></div>
 
-        <div v-if="!show_cart" id="products_list">
-            <div v-for="product in products">
-                <div class="col-md-3 prod_image">
+        <div v-if="page=='prods'" id="products_list">
+            <div v-for="product in products" class="container">
+                <div class="third prod_image">
                     <img v-bind:src="product.image_url" width="100%" class="product_image"/>
                 </div>
-                <div class="col-md-10 product_info">
+                <div class="twothirds product_info">
                     <div class="product_name"><h2>${product.product_name}</h2></div>
                     <div class="product_quantity_price">
                         <span class="product_price">$ ${product.price}</span>
@@ -52,7 +52,7 @@
                             <button class="btn btn-secondary" v-on:click="inc_desired_quantity(product._idx, 1)"><i class="fa fa-plus"></i></button>
                             <span class="desired_quantity">${product.desired_quantity}</span>
                             <button class="btn btn-secondary" v-on:click="inc_desired_quantity(product._idx, -1)"><i class="fa fa-minus"></i></button>
-                            <button class="btn btn-danger" v-on:click="buy_product(product._idx)"><i class="fa fa-lg fa-shopping-cart"></i> Buy</button>
+                            <button class="btn red" v-on:click="buy_product(product._idx)"><i class="fa fa-lg fa-shopping-cart"></i> Buy</button>
                         </span>
                     </div>
                     <div class="product_description">
@@ -64,12 +64,12 @@
             </div>
         </div>
 
-        <div v-if="show_cart" id="cart_list">
-            <div v-for="product in cart">
-                <div class="col-md-3 prod_image">
+        <div v-if="page=='cart'" id="cart_list">
+            <div v-for="product in cart" class="container">
+                <div class="col-md-3 prod_image third">
                     <img v-bind:src="product.image_url" width="100%" class="product_image"/>
                 </div>
-                <div class="col-md-10 product_info">
+                <div class="col-md-10 product_info twothirds">
                     <div class="product_name"><h2>${product.product_name}</h2></div>
                     <div class="product_quantity_price">
                         <span class="product_price">$ ${product.price}</span>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <div class="total_price col-md-11">Your total price: $ ${cart_total}</div>
+            <div class="total_price">Your total price: $ ${cart_total}</div>
         </div>
 
     </div>

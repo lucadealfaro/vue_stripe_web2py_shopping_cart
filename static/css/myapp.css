@@ -3,51 +3,55 @@
   color: #bb8833;
 }
 
-/* line 6, ../sass/_main.scss */
-.main_content input.search_input {
-  width: 90%;
+/* line 5, ../sass/_main.scss */
+div.main_content {
+  margin: 20px;
 }
-/* line 9, ../sass/_main.scss */
-.main_content button:focus {
+/* line 7, ../sass/_main.scss */
+div.main_content button:focus {
   border-color: white;
   outline: none;
 }
-/* line 14, ../sass/_main.scss */
-.main_content div.product_description {
+/* line 12, ../sass/_main.scss */
+div.main_content input.search_input {
+  width: 80% !important;
+}
+/* line 15, ../sass/_main.scss */
+div.main_content div.product_description {
   margin-top: 15px;
 }
-/* line 17, ../sass/_main.scss */
-.main_content span.buy_buttons {
+/* line 18, ../sass/_main.scss */
+div.main_content span.buy_buttons {
   margin-left: 30px;
 }
-/* line 20, ../sass/_main.scss */
-.main_content span.product_quantity {
+/* line 21, ../sass/_main.scss */
+div.main_content span.product_quantity {
   margin-left: 30px;
 }
-/* line 23, ../sass/_main.scss */
-.main_content span.product_price {
+/* line 24, ../sass/_main.scss */
+div.main_content span.product_price {
   font-size: 140%;
   font-weight: bold;
 }
-/* line 27, ../sass/_main.scss */
-.main_content .product_image {
+/* line 28, ../sass/_main.scss */
+div.main_content .product_image {
   max-width: 300px;
 }
-/* line 30, ../sass/_main.scss */
-.main_content .prod_image {
-  display: block;
-}
-/* line 33, ../sass/_main.scss */
-.main_content .shopping_button {
+/* line 31, ../sass/_main.scss */
+div.main_content .shopping_button {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/* line 37, ../sass/_main.scss */
-.main_content .search_div {
+/* line 35, ../sass/_main.scss */
+div.main_content .search_div {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/* line 41, ../sass/_main.scss */
-.main_content .shopping_cart_title {
+/* line 39, ../sass/_main.scss */
+div.main_content .shopping_cart_title {
   font-size: 250%;
+}
+/* line 42, ../sass/_main.scss */
+div.main_content .total_price {
+  font-size: 150%;
 }

@@ -95,8 +95,8 @@ var app = function() {
         self.post_cart();
     };
 
-    self.toggle_show_cart = function () {
-        self.vue.show_cart = !self.vue.show_cart;
+    self.goto = function (page) {
+        self.vue.page = page;
     };
 
     self.vue = new Vue({
@@ -109,14 +109,14 @@ var app = function() {
             product_search: '',
             cart_size: 0,
             cart_total: 0,
-            show_cart: false
+            page: 'prods'
         },
         methods: {
             get_products: self.get_products,
             inc_desired_quantity: self.inc_desired_quantity,
             inc_cart_quantity: self.inc_cart_quantity,
             buy_product: self.buy_product,
-            toggle_show_cart: self.toggle_show_cart,
+            goto: self.goto,
             do_search: self.get_products
         }
 
