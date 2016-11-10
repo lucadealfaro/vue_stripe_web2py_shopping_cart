@@ -25,5 +25,11 @@ db.define_table('customer_order',
     Field('cart', 'blob'),
 )
 
+# Let's define a secret key for stripe transactions.
+from gluon.utils import web2py_uuid
+if session.hmac_key is None:
+    session.hmac_key = web2py_uuid()
+
+
 # after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)

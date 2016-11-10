@@ -5,7 +5,7 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
     var products_url = "{{=URL('default', 'get_products')}}";
-    var purchase_url = "{{=URL('default', 'purchase')}}"
+    var purchase_url = "{{=URL('default', 'purchase', hmac_key=session.hmac_key)}}"
 </script>
 {{end}}
 

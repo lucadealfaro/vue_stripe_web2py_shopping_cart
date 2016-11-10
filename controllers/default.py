@@ -34,6 +34,8 @@ def get_products():
 
 def purchase():
     """Ajax function called when a customer orders and pays for the cart."""
+    if not URL.verify(request, hmac_key=session.hmac_key):
+        raise HTTP(500)
     db.customer_order.insert(customer_info=request.vars.customer_info, cart=request.vars.cart)
     return "ok"
 
