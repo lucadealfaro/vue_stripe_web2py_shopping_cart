@@ -133,6 +133,7 @@ var app = function() {
             {
                 customer_info: JSON.stringify(self.customer_info),
                 transaction_token: JSON.stringify(self.stripe_token),
+                amount: self.vue.cart_total,
                 cart: JSON.stringify(self.vue.cart),
             },
             function (data) {
